@@ -1,0 +1,19 @@
+﻿# Dependencies and packages
+node_modules/
+__pycache__/
+*.pyc
+
+# Environment variables and secrets
+.env
+.env.local
+
+# Build and distribution artifacts
+dist/
+build/
+*.log
+
+# OS and IDE temporary files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

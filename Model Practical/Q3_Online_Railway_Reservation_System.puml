@@ -1,0 +1,98 @@
+@startuml Q3_Online_Railway_Reservation_System
+skinparam classAttributeIconSize 0
+title Online Railway Reservation System - UML Class Diagram
+
+class Passenger {
+  - passengerId : String
+  - name : String
+  - age : int
+  - gender : String
+  - email : String
+  - phone : String
+  + searchTrains(src: String, dest: String, date: Date) : List<TrainSchedule>
+  + checkAvailability(scheduleId: String) : int
+  + bookTicket(scheduleId: String, berthPref: String) : TicketBooking
+  + cancelTicket(pnrNumber: String) : RefundReceipt
+}
+
+class Train {
+  - trainNumber : int
+  - trainName : String
+  - sourceStation : String
+  - destinationStation : String
+  - totalCoaches : int
+  + getRouteDetails() : String
+  + getSchedules() : List<TrainSchedule>
+}
+
+class TrainSchedule {
+  - scheduleId : String
+  - journeyDate : Date
+  - departureTime : Time
+  - arrivalTime : Time
+  - availableSeats : int
+  + checkSeatAvailability() : List<Seat>
+  + allocateSeat(berthPref: String) : Seat
+  + updateSeatInventory(seatNo: String, booked: boolean) : void
+}
+
+class Seat {
+  - seatNumber : String
+  - coachNumber : String
+  - berthType : String
+  - classType : String
+  - isAvailable : boolean
+  + lockSeat(scheduleId: String) : boolean
+  + releaseSeat() : void
+}
+
+class TicketBooking {
+  - pnrNumber : String
+  - bookingDate : DateTime
+  - journeyDate : Date
+  - totalFare : double
+  - bookingStatus : String
+  + confirmBooking() : E_Ticket
+  + cancelBooking() : double
+  + sendETicket() : void
+}
+
+class E_Ticket {
+  - ticketId : String
+  - pnrNumber : String
+  - assignedCoach : String
+  - assignedBerth : String
+  - qrCodeHash : String
+  + generatePDF() : File
+  + emailToPassenger(email: String) : boolean
+}
+
+class PaymentGateway {
+  - paymentId : String
+  - transactionRef : String
+  - amount : double
+  - paymentMethod : String
+  - paymentStatus : String
+  + processPayment(amount: double) : boolean
+  + initiateRefund(paymentId: String, amount: double) : boolean
+}
+
+class CancellationRule {
+  - ruleId : String
+  - hoursBeforeDeparture : int
+  - deductionPercentage : double
+  - minimumClerkageCharge : double
+  + calculateRefund(fare: double, hoursLeft: int) : double
+  + validateEligibility(status: String) : boolean
+}
+
+Passenger "1" --> "0..*" TicketBooking : makes >
+Passenger "0..*" ..> "1..*" TrainSchedule : searches >
+Train "1" *-- "1..*" TrainSchedule : maintains >
+TrainSchedule "1" *-- "1..*" Seat : manages inventory >
+TicketBooking "0..1" --> "1" Seat : reserves (unique per schedule) >
+TicketBooking "0..*" --> "1" TrainSchedule : booked for >
+TicketBooking "1" *-- "1" E_Ticket : generates >
+TicketBooking "1" --> "1" PaymentGateway : paid/refunded via >
+TicketBooking "0..*" ..> "1" CancellationRule : applies on cancel >
+@enduml

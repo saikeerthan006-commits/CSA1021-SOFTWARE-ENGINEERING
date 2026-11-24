@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RAPTOR_Document Version="4.0">
+  <Tab Name="main">
+    <Symbol Type="Oval" Text="Start" X="300" Y="40">
+      <Next>
+        <Symbol Type="Parallelogram_Input" Prompt="&quot;Enter a number: &quot;" Variable="n" X="300" Y="120">
+          <Next>
+            <Symbol Type="Rectangle_Assignment" Variable="i" Expression="1" X="300" Y="200">
+              <Next>
+                <Symbol Type="Loop" Condition="i &gt; 10" X="300" Y="280">
+                  <No_Branch>
+                    <Symbol Type="Rectangle_Assignment" Variable="result" Expression="n * i" X="300" Y="420">
+                      <Next>
+                        <Symbol Type="Parallelogram_Output" Expression="n + &quot; × &quot; + i + &quot; = &quot; + result" NewLine="True" X="300" Y="500">
+                          <Next>
+                            <Symbol Type="Rectangle_Assignment" Variable="i" Expression="i + 1" X="300" Y="580" />
+                          </Next>
+                        </Symbol>
+                      </Next>
+                    </Symbol>
+                  </No_Branch>
+                  <Yes_Branch>
+                    <Symbol Type="Oval" Text="End" X="300" Y="680" />
+                  </Yes_Branch>
+                </Symbol>
+              </Next>
+            </Symbol>
+          </Next>
+        </Symbol>
+      </Next>
+    </Symbol>
+  </Tab>
+</RAPTOR_Document>

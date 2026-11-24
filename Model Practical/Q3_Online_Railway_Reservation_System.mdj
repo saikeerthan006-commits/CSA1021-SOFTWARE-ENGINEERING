@@ -1,0 +1,27 @@
+{
+  "_type": "Project",
+  "_id": "AAAAAAFF+h6SjaM2Hec=",
+  "name": "OnlineRailwayReservationSystem",
+  "ownedElements": [
+    {
+      "_type": "UMLModel",
+      "_id": "AAAAAAFF+qBWK6M3Z8Y=",
+      "name": "RailwayReservationModel",
+      "ownedElements": [
+        {
+          "_type": "UMLClassDiagram",
+          "_id": "AAAAAAFF+qBtyKM79qY=",
+          "name": "Online Railway Reservation System - Class Diagram"
+        },
+        { "_type": "UMLClass", "name": "Passenger" },
+        { "_type": "UMLClass", "name": "Train" },
+        { "_type": "UMLClass", "name": "TrainSchedule" },
+        { "_type": "UMLClass", "name": "Seat" },
+        { "_type": "UMLClass", "name": "TicketBooking" },
+        { "_type": "UMLClass", "name": "E_Ticket" },
+        { "_type": "UMLClass", "name": "PaymentGateway" },
+        { "_type": "UMLClass", "name": "CancellationRule" }
+      ]
+    }
+  ]
+}
